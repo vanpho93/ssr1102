@@ -9530,6 +9530,10 @@ var _Note = __webpack_require__(84);
 
 var _Note2 = _interopRequireDefault(_Note);
 
+var _getAll = __webpack_require__(184);
+
+var _getAll2 = _interopRequireDefault(_getAll);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9537,8 +9541,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var defaultArray = ['Lam bai tap ve nha', 'Nop bao cao cuoi thang', 'Hoc Javascript'];
 
 var List = function (_Component) {
     _inherits(List, _Component);
@@ -9557,11 +9559,8 @@ var List = function (_Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            fetch('http://localhost:3000/all') // eslint-disable-line
-            .then(function (res) {
-                return res.json();
-            }).then(function (resJSON) {
-                return _this2.setState({ mang: resJSON });
+            (0, _getAll2.default)().then(function (arrNote) {
+                return _this2.setState({ mang: arrNote });
             });
         }
     }, {
@@ -22125,6 +22124,25 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var getAll = function getAll() {
+    return fetch('http://localhost:3000/all') // eslint-disable-line
+    .then(function (res) {
+        return res.json();
+    });
+};
+
+exports.default = getAll;
 
 /***/ })
 /******/ ]);

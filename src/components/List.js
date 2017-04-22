@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import Note from './Note';
-
-const defaultArray = [
-    'Lam bai tap ve nha', 
-    'Nop bao cao cuoi thang', 
-    'Hoc Javascript'
-];
+import getAll from '../api/getAll';
 
 export default class List extends Component {
     constructor(props) {
@@ -14,9 +9,8 @@ export default class List extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/all')// eslint-disable-line
-        .then(res => res.json())
-        .then(resJSON => this.setState({ mang: resJSON }));
+        getAll()
+        .then(arrNote => this.setState({ mang: arrNote }));
     }
 
     render() {
