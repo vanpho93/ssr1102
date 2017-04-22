@@ -1,5 +1,7 @@
-function show() {
-    console.log('SHOW');
-}
+import React, { Component } from 'react';
 
-module.exports = show;
+export default class Note extends Component {
+    render() {
+        return <p>Khoa Pham React Serverside</p>
+    }
+}

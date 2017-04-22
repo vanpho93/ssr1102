@@ -1,8 +1,9 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Note from './components/Note';
 
 ReactDOM.render(
-    <a href="http://google.com">Google</a>,
+    <Note />,
     document.getElementById('root')
 );
 
