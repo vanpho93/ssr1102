@@ -9548,18 +9548,30 @@ var List = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
-        _this.state = { mang: defaultArray };
+        _this.state = { mang: [] };
         return _this;
     }
 
     _createClass(List, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            fetch('http://localhost:3000/all') // eslint-disable-line
+            .then(function (res) {
+                return res.json();
+            }).then(function (resJSON) {
+                return _this2.setState({ mang: resJSON });
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 null,
                 this.state.mang.map(function (e, i) {
-                    return _react2.default.createElement(_Note2.default, { content: e, key: i });
+                    return _react2.default.createElement(_Note2.default, { content: e.content, key: i });
                 })
             );
         }
@@ -9603,8 +9615,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _reactDom2.default.render(_react2.default.createElement(_List2.default, null), document.getElementById('root') // eslint-disable-line
 );
-
-console.log(a);
 
 //react react-dom
 // babel-core babel-loader babel-preset-react
