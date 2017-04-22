@@ -11,5 +11,6 @@ module.exports = {
                 exclude: /node_modules/
             }
         ]
-    }
+    },
+    devtool: 'cheap-source-map'
 };
