@@ -9573,14 +9573,23 @@ var List = function (_Component) {
             this.setState({ mang: this.state.mang.concat(item) });
         }
     }, {
+        key: 'remove',
+        value: function remove(id) {
+            this.setState({ mang: this.state.mang.filter(function (e) {
+                    return e.id !== id;
+                }) });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
+
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(_NoteForm2.default, { onAdd: this.addItem.bind(this) }),
                 this.state.mang.map(function (e) {
-                    return _react2.default.createElement(_Note2.default, { content: e.content, key: e.id, id: e.id });
+                    return _react2.default.createElement(_Note2.default, { content: e.content, key: e.id, id: e.id, onRemove: _this3.remove.bind(_this3) });
                 })
             );
         }
@@ -9688,10 +9697,12 @@ var Note = function (_Component) {
     _createClass(Note, [{
         key: 'remove',
         value: function remove() {
-            var id = this.props.id;
+            var _props = this.props,
+                id = _props.id,
+                onRemove = _props.onRemove;
 
             (0, _removeNote2.default)(id).then(function () {
-                return console.log('XOA THANH CONG');
+                return onRemove(id);
             });
         }
     }, {

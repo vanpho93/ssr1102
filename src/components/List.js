@@ -18,11 +18,15 @@ export default class List extends Component {
         this.setState({ mang: this.state.mang.concat(item) });
     }
 
+    remove(id) {
+        this.setState({ mang: this.state.mang.filter(e => e.id !== id) });
+    }
+
     render() {
         return (
             <div>
                 <NoteForm onAdd={this.addItem.bind(this)} />
-                {this.state.mang.map(e => <Note content={e.content} key={e.id} id={e.id} />)}
+                {this.state.mang.map(e => <Note content={e.content} key={e.id} id={e.id} onRemove={this.remove.bind(this)} />)}
             </div>
         );
     }

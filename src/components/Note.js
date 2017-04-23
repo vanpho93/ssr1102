@@ -3,9 +3,9 @@ import removeNote from '../api/removeNote';
 
 export default class Note extends Component {
     remove() {
-        const { id } = this.props;
+        const { id, onRemove } = this.props;
         removeNote(id)
-        .then(() => console.log('XOA THANH CONG'));
+        .then(() => onRemove(id));
     }
     render() {
         return (
