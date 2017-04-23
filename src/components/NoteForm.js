@@ -5,7 +5,7 @@ export default class NoteForm extends Component {
     onSubmit(e) {
         e.preventDefault();
         insertNote(this.refs.txtNote.value)
-        .then(() => console.log('THEM_THANH_CONG'));
+        .then(resJSON => console.log(resJSON));
         this.refs.txtNote.value = '';
     }
     render() {

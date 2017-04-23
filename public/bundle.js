@@ -22191,8 +22191,8 @@ var NoteForm = function (_Component) {
         key: 'onSubmit',
         value: function onSubmit(e) {
             e.preventDefault();
-            (0, _insertNote2.default)(this.refs.txtNote.value).then(function () {
-                return console.log('THEM_THANH_CONG');
+            (0, _insertNote2.default)(this.refs.txtNote.value).then(function (resJSON) {
+                return console.log(resJSON);
             });
             this.refs.txtNote.value = '';
         }
@@ -22243,7 +22243,10 @@ var insertNote = function insertNote(note) {
         body: JSON.stringify({ note: note })
     };
 
-    return fetch('http://localhost:3000/insert', option); // eslint-disable-line
+    return fetch('http://localhost:3000/insert', option) // eslint-disable-line
+    .then(function (res) {
+        return res.json();
+    });
 };
 
 exports.default = insertNote;

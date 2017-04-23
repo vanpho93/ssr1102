@@ -31,7 +31,7 @@ function getAllNote() {
 }
 
 function insertNote(note) {
-    const sql = 'INSERT INTO public."Notes"(content) VALUES ($1);';
+    const sql = 'INSERT INTO public."Notes"(content) VALUES ($1) RETURNING *';
     return queryDB(sql, [note]);
 }
 
