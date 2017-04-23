@@ -9579,8 +9579,8 @@ var List = function (_Component) {
                 'div',
                 null,
                 _react2.default.createElement(_NoteForm2.default, { onAdd: this.addItem.bind(this) }),
-                this.state.mang.map(function (e, i) {
-                    return _react2.default.createElement(_Note2.default, { content: e.content, key: i });
+                this.state.mang.map(function (e) {
+                    return _react2.default.createElement(_Note2.default, { content: e.content, key: e.id, id: e.id });
                 })
             );
         }
@@ -9682,6 +9682,9 @@ var Note = function (_Component) {
     }
 
     _createClass(Note, [{
+        key: 'remove',
+        value: function remove() {}
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -9691,6 +9694,11 @@ var Note = function (_Component) {
                     'p',
                     null,
                     this.props.content
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.remove.bind(this) },
+                    'Xoa'
                 )
             );
         }

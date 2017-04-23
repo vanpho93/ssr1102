@@ -22,7 +22,7 @@ export default class List extends Component {
         return (
             <div>
                 <NoteForm onAdd={this.addItem.bind(this)} />
-                {this.state.mang.map((e, i) => <Note content={e.content} key={i} />)}
+                {this.state.mang.map(e => <Note content={e.content} key={e.id} id={e.id} />)}
             </div>
         );
     }

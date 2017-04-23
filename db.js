@@ -35,4 +35,9 @@ function insertNote(note) {
     return queryDB(sql, [note]);
 }
 
-module.exports = { getAllNote, insertNote };
+function removeNote(id) {
+    const sql = 'DELETE FROM public."Notes" WHERE id = $1';
+    return queryDB(sql, [id]);
+}
+
+module.exports = { getAllNote, insertNote, removeNote };

@@ -3,7 +3,7 @@ const express = require('express');
 const parser = require('body-parser').urlencoded({ extended: false });
 const jsonParser = require('body-parser').json();
 
-const { getAllNote, insertNote } = require('./db');
+const { getAllNote, insertNote, removeNote } = require('./db');
 
 const app = express();
 app.listen(3000, () => console.log('Server started'));
@@ -25,4 +25,11 @@ app.post('/insert', jsonParser, (req, res) => {
     insertNote(note)
     .then(result => res.send(result.rows[0]))
     .catch(err => res.send({ err: err.toString() }));
+});
+
+app.get('/remove/:id', (req, res) => {
+    const { id } = req.params;
+    removeNote(id)
+    .then(() => res.send('THANH_CONG'))
+    .catch(() => res.send('THAT_BAT'));
 });
