@@ -30,4 +30,9 @@ function getAllNote() {
     .then(result => result.rows);
 }
 
-module.exports = { getAllNote };
+function insertNote(note) {
+    const sql = 'INSERT INTO public."Notes"(content) VALUES ($1);';
+    return queryDB(sql, [note]);
+}
+
+module.exports = { getAllNote, insertNote };
