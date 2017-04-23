@@ -22184,15 +22184,29 @@ var NoteForm = function (_Component) {
     }
 
     _createClass(NoteForm, [{
+        key: 'onSubmit',
+        value: function onSubmit(e) {
+            e.preventDefault();
+            console.log(this.refs.txtNote.value);
+            this.refs.txtNote.value = '';
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(
-                    'p',
-                    null,
-                    'Form'
+                    'form',
+                    { onSubmit: this.onSubmit.bind(this) },
+                    _react2.default.createElement('input', { type: 'text', ref: 'txtNote', placeholder: 'Enter your note' }),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'button',
+                        null,
+                        'Send'
+                    )
                 )
             );
         }
