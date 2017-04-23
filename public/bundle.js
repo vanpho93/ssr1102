@@ -22166,6 +22166,10 @@ var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _insertNote = __webpack_require__(186);
+
+var _insertNote2 = _interopRequireDefault(_insertNote);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22187,7 +22191,9 @@ var NoteForm = function (_Component) {
         key: 'onSubmit',
         value: function onSubmit(e) {
             e.preventDefault();
-            console.log(this.refs.txtNote.value);
+            (0, _insertNote2.default)(this.refs.txtNote.value).then(function () {
+                return console.log('THEM_THANH_CONG');
+            });
             this.refs.txtNote.value = '';
         }
     }, {
@@ -22216,6 +22222,31 @@ var NoteForm = function (_Component) {
 }(_react.Component);
 
 exports.default = NoteForm;
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var insertNote = function insertNote(note) {
+    var option = {
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({ note: note })
+    };
+
+    return fetch('http://localhost:3000/insert', option); // eslint-disable-line
+};
+
+exports.default = insertNote;
 
 /***/ })
 /******/ ]);

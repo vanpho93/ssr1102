@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import insertNote from '../api/insertNote';
 
 export default class NoteForm extends Component {
     onSubmit(e) {
         e.preventDefault();
-        console.log(this.refs.txtNote.value);
+        insertNote(this.refs.txtNote.value)
+        .then(() => console.log('THEM_THANH_CONG'));
         this.refs.txtNote.value = '';
     }
     render() {
