@@ -4,8 +4,9 @@ import insertNote from '../api/insertNote';
 export default class NoteForm extends Component {
     onSubmit(e) {
         e.preventDefault();
+        const { onAdd } = this.props;
         insertNote(this.refs.txtNote.value)
-        .then(resJSON => console.log(resJSON));
+        .then(resJSON => onAdd(resJSON));
         this.refs.txtNote.value = '';
     }
     render() {

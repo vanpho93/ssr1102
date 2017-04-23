@@ -8,16 +8,20 @@ export default class List extends Component {
         super(props);
         this.state = { mang: [] };
     }
-
+    
     componentDidMount() {
         getAll()
         .then(arrNote => this.setState({ mang: arrNote }));
     }
 
+    addItem(item) {
+        this.setState({ mang: this.state.mang.concat(item) });
+    }
+
     render() {
         return (
             <div>
-                <NoteForm />
+                <NoteForm onAdd={this.addItem.bind(this)} />
                 {this.state.mang.map((e, i) => <Note content={e.content} key={i} />)}
             </div>
         );

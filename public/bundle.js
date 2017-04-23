@@ -9568,12 +9568,17 @@ var List = function (_Component) {
             });
         }
     }, {
+        key: 'addItem',
+        value: function addItem(item) {
+            this.setState({ mang: this.state.mang.concat(item) });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_NoteForm2.default, null),
+                _react2.default.createElement(_NoteForm2.default, { onAdd: this.addItem.bind(this) }),
                 this.state.mang.map(function (e, i) {
                     return _react2.default.createElement(_Note2.default, { content: e.content, key: i });
                 })
@@ -22191,8 +22196,10 @@ var NoteForm = function (_Component) {
         key: 'onSubmit',
         value: function onSubmit(e) {
             e.preventDefault();
+            var onAdd = this.props.onAdd;
+
             (0, _insertNote2.default)(this.refs.txtNote.value).then(function (resJSON) {
-                return console.log(resJSON);
+                return onAdd(resJSON);
             });
             this.refs.txtNote.value = '';
         }
