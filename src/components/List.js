@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Note from './Note';
+import NoteForm from './NoteForm';
 import getAll from '../api/getAll';
 
 export default class List extends Component {
@@ -16,6 +17,7 @@ export default class List extends Component {
     render() {
         return (
             <div>
+                <NoteForm />
                 {this.state.mang.map((e, i) => <Note content={e.content} key={i} />)}
             </div>
         );
