@@ -9580,6 +9580,15 @@ var List = function (_Component) {
                 }) });
         }
     }, {
+        key: 'update',
+        value: function update(id, content) {
+            // this.state.mang[id].content = content;
+            this.state.mang.find(function (e) {
+                return e.id === id;
+            }).content = content;
+            this.setState(this.state);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this3 = this;
@@ -9589,7 +9598,7 @@ var List = function (_Component) {
                 null,
                 _react2.default.createElement(_NoteForm2.default, { onAdd: this.addItem.bind(this) }),
                 this.state.mang.map(function (e) {
-                    return _react2.default.createElement(_Note2.default, { content: e.content, key: e.id, id: e.id, onRemove: _this3.remove.bind(_this3) });
+                    return _react2.default.createElement(_Note2.default, { content: e.content, key: e.id, id: e.id, onRemove: _this3.remove.bind(_this3), onUpdate: _this3.update.bind(_this3) });
                 })
             );
         }
@@ -9677,6 +9686,10 @@ var _removeNote = __webpack_require__(187);
 
 var _removeNote2 = _interopRequireDefault(_removeNote);
 
+var _updateNote = __webpack_require__(188);
+
+var _updateNote2 = _interopRequireDefault(_updateNote);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9688,10 +9701,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Note = function (_Component) {
     _inherits(Note, _Component);
 
-    function Note() {
+    function Note(props) {
         _classCallCheck(this, Note);
 
-        return _possibleConstructorReturn(this, (Note.__proto__ || Object.getPrototypeOf(Note)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Note.__proto__ || Object.getPrototypeOf(Note)).call(this, props));
+
+        _this.state = { isUpdating: false };
+        return _this;
     }
 
     _createClass(Note, [{
@@ -9706,20 +9722,55 @@ var Note = function (_Component) {
             });
         }
     }, {
+        key: 'update',
+        value: function update() {
+            this.setState({ isUpdating: true });
+        }
+    }, {
+        key: 'save',
+        value: function save() {
+            var _props2 = this.props,
+                id = _props2.id,
+                onUpdate = _props2.onUpdate;
+
+            var text = this.refs.txtInput.value;
+            (0, _updateNote2.default)(text, id).then(function () {
+                return onUpdate(id, text);
+            });
+            this.setState({ isUpdating: false });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var isUpdating = this.state.isUpdating;
+
+            var input = _react2.default.createElement('input', { ref: 'txtInput', defaultValue: this.props.content });
+            var showHTML = isUpdating ? input : _react2.default.createElement(
+                'p',
+                null,
+                this.props.content
+            );
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    this.props.content
-                ),
+                showHTML,
+                _react2.default.createElement('hr', null),
                 _react2.default.createElement(
                     'button',
                     { onClick: this.remove.bind(this) },
                     'Xoa'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.update.bind(this) },
+                    'Sua'
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.save.bind(this) },
+                    'Luu'
                 )
             );
         }
@@ -22305,6 +22356,34 @@ var removeNote = function removeNote(id) {
 };
 
 exports.default = removeNote;
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var updateNote = function updateNote(note, id) {
+    var option = {
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({ id: id, note: note })
+    };
+
+    return fetch('http://localhost:3000/update', option) // eslint-disable-line
+    .then(function (res) {
+        return res.text();
+    });
+};
+
+exports.default = updateNote;
 
 /***/ })
 /******/ ]);

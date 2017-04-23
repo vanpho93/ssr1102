@@ -40,4 +40,9 @@ function removeNote(id) {
     return queryDB(sql, [id]);
 }
 
-module.exports = { getAllNote, insertNote, removeNote };
+function updateNote(id, note) {
+    const sql = 'UPDATE public."Notes" SET content = $1 WHERE id = $2';
+    return queryDB(sql, [note, id]);
+}
+
+module.exports = { getAllNote, insertNote, removeNote, updateNote };

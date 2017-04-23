@@ -22,11 +22,17 @@ export default class List extends Component {
         this.setState({ mang: this.state.mang.filter(e => e.id !== id) });
     }
 
+    update(id, content) {
+        // this.state.mang[id].content = content;
+        this.state.mang.find(e => e.id === id).content = content;
+        this.setState(this.state);
+    }
+
     render() {
         return (
             <div>
                 <NoteForm onAdd={this.addItem.bind(this)} />
-                {this.state.mang.map(e => <Note content={e.content} key={e.id} id={e.id} onRemove={this.remove.bind(this)} />)}
+                {this.state.mang.map(e => <Note content={e.content} key={e.id} id={e.id} onRemove={this.remove.bind(this)} onUpdate={this.update.bind(this)} />)}
             </div>
         );
     }
