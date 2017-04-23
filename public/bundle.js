@@ -9664,6 +9664,10 @@ var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _removeNote = __webpack_require__(187);
+
+var _removeNote2 = _interopRequireDefault(_removeNote);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9683,7 +9687,13 @@ var Note = function (_Component) {
 
     _createClass(Note, [{
         key: 'remove',
-        value: function remove() {}
+        value: function remove() {
+            var id = this.props.id;
+
+            (0, _removeNote2.default)(id).then(function () {
+                return console.log('XOA THANH CONG');
+            });
+        }
     }, {
         key: 'render',
         value: function render() {
@@ -22265,6 +22275,25 @@ var insertNote = function insertNote(note) {
 };
 
 exports.default = insertNote;
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var removeNote = function removeNote(id) {
+    return fetch("http://localhost:3000/remove/" + id) // eslint-disable-line
+    .then(function (res) {
+        return res.text();
+    });
+};
+
+exports.default = removeNote;
 
 /***/ })
 /******/ ]);
