@@ -9634,7 +9634,19 @@ var _List = __webpack_require__(81);
 
 var _List2 = _interopRequireDefault(_List);
 
+var _insertNote = __webpack_require__(186);
+
+var _insertNote2 = _interopRequireDefault(_insertNote);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _insertNote2.default)('Chao cac ban ????   !').then(function (a) {
+    return a.text();
+}).then(function (a) {
+    return console.log(a);
+}).catch(function (err) {
+    return console.log(err);
+});
 
 _reactDom2.default.render(_react2.default.createElement(_List2.default, null), document.getElementById('root') // eslint-disable-line
 );
@@ -22216,6 +22228,31 @@ var NoteForm = function (_Component) {
 }(_react.Component);
 
 exports.default = NoteForm;
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var insertNote = function insertNote(note) {
+    var option = {
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({ note: note })
+    };
+
+    return fetch('http://localhost:3000/insert', option); // eslint-disable-line
+};
+
+exports.default = insertNote;
 
 /***/ })
 /******/ ]);

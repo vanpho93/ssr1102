@@ -22,6 +22,7 @@ app.get('/all', (req, res) => {
 
 app.post('/insert', jsonParser, (req, res) => {
     const { note } = req.body;
+    console.log(note);
     insertNote(note)
     .then(result => res.send('THANH_CONG'))
     .catch(err => res.send('THAT_BAI'));
